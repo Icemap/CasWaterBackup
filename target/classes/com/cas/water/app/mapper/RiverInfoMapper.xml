@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cas.water.app.dao.RiverInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.cas.water.app.pojo.RiverInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="river_name" property="riverName" jdbcType="VARCHAR" />
+    <result column="belong_user_id" property="belongUserId" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="hold" property="hold" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, river_name, belong_user_id, content, hold
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from river_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from river_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cas.water.app.pojo.RiverInfo" >
+    insert into river_info (id, river_name, belong_user_id, 
+      content, hold)
+    values (#{id,jdbcType=INTEGER}, #{riverName,jdbcType=VARCHAR}, #{belongUserId,jdbcType=INTEGER}, 
+      #{content,jdbcType=VARCHAR}, #{hold,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cas.water.app.pojo.RiverInfo" >
+    insert into river_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="riverName != null" >
+        river_name,
+      </if>
+      <if test="belongUserId != null" >
+        belong_user_id,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="hold != null" >
+        hold,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="riverName != null" >
+        #{riverName,jdbcType=VARCHAR},
+      </if>
+      <if test="belongUserId != null" >
+        #{belongUserId,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="hold != null" >
+        #{hold,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cas.water.app.pojo.RiverInfo" >
+    update river_info
+    <set >
+      <if test="riverName != null" >
+        river_name = #{riverName,jdbcType=VARCHAR},
+      </if>
+      <if test="belongUserId != null" >
+        belong_user_id = #{belongUserId,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="hold != null" >
+        hold = #{hold,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cas.water.app.pojo.RiverInfo" >
+    update river_info
+    set river_name = #{riverName,jdbcType=VARCHAR},
+      belong_user_id = #{belongUserId,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      hold = #{hold,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
